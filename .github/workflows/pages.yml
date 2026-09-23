@@ -1,0 +1,36 @@
+name: Publish CapiLab Web
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download verified Web release
+        run: |
+          curl --fail --location --retry 3 --output capilab.zip https://github.com/Alvaresallan/capilab/releases/download/web-v0.6.0/CapiLab-Web-v0.6.0.zip
+          echo "3c390ad94df0e8a79e259f1c0666931ed0bf7c042b019b9e2efdc23310a0f285  capilab.zip" | sha256sum --check
+          unzip -q capilab.zip -d _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
