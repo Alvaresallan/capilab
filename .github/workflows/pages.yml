@@ -27,6 +27,22 @@ jobs:
           curl --fail --location --retry 3 --output capilab.zip https://github.com/Alvaresallan/capilab/releases/download/web-v0.6.3/CapiLab-Web-v0.6.3.zip
           echo "5f1991c045027e993320e380f115fab4d95e068c6b1b850d90be4a7bfcf9db80  capilab.zip" | sha256sum --check
           unzip -q capilab.zip -d _site
+      - name: Update Windows download link
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          p = Path('_site/index.html')
+          old = '/v0.5.2/CapiLab-Windows-v0.5.2.zip'
+          new = '/v0.6.3/CapiLab-Windows-v0.6.3.zip'
+          content = p.read_text(encoding='utf-8')
+          assert old in content or new in content
+          p.write_text(content.replace(old, new), encoding='utf-8')
+          manifest = Path('_site/manifest-sha256.json')
+          hashes = json.loads(manifest.read_text())
+          hashes['index.html'] = hashlib.sha256(p.read_bytes()).hexdigest()
+          manifest.write_text(json.dumps(hashes, indent=2) + '\n')
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
