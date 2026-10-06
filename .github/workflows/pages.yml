@@ -3,7 +3,7 @@ name: Publish CapiLab Web
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/pages.yml']
+    paths: ['.github/workflows/pages.yml', 'web/links/**']
   workflow_dispatch:
 
 permissions:
@@ -22,6 +22,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
       - name: Download verified Web release
         run: |
           curl --fail --location --retry 3 --output capilab.zip https://github.com/Alvaresallan/capilab/releases/download/web-v0.6.3/CapiLab-Web-v0.6.3.zip
@@ -43,6 +44,10 @@ jobs:
           hashes['index.html'] = hashlib.sha256(p.read_bytes()).hexdigest()
           manifest.write_text(json.dumps(hashes, indent=2) + '\n')
           PY
+      - name: Add branded CapiLab links page
+        run: |
+          mkdir -p _site/links
+          cp web/links/index.html web/links/julio.png _site/links/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
