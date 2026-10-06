@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102d35">
+  <meta name="description" content="Conheça o CapiLab: Energia da Amazônia, jogue gratuitamente e acompanhe a votação do projeto.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CapiLab: Energia da Amazônia">
+  <meta property="og:description" content="Jogue com Júlio, a capivara cientista. Ciência para todo mundo em um RPG 2D pixelado.">
+  <title>CapiLab | Vote e jogue</title>
+  <link rel="icon" href="julio.png" type="image/png">
+  <style>
+    :root{color-scheme:dark;--ink:#102d35;--deep:#071b21;--panel:#173a42;--mint:#7ab7a4;--gold:#f2c978;--cream:#eaf3e7;--muted:#b5d5c9}
+    *{box-sizing:border-box}
+    html{background:var(--ink)}
+    body{margin:0;min-height:100dvh;color:var(--cream);font-family:Consolas,"Courier New",monospace;background-color:var(--ink);background-image:radial-gradient(#28525a 1.5px,transparent 1.5px);background-size:28px 28px}
+    a{color:inherit}
+    a:focus-visible{outline:4px solid #fff;outline-offset:5px}
+    .wrap{width:min(100% - 28px,560px);margin:auto;padding:30px 0 max(35px,env(safe-area-inset-bottom));text-align:center}
+    .topline{border-top:6px solid var(--mint);padding-top:17px;color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.15em}
+    .brand{margin:18px 0 0;color:var(--gold);font-size:clamp(49px,13vw,76px);line-height:1;font-weight:900;letter-spacing:.07em;text-shadow:5px 5px 0 var(--deep)}
+    h1{margin:8px 0 16px;font-size:clamp(19px,5vw,27px);line-height:1.3}
+    .badge{display:inline-block;margin-bottom:21px;padding:8px 14px;border:2px solid var(--gold);color:var(--gold);background:var(--panel);font-size:13px;font-weight:800;letter-spacing:.08em}
+    .scene{position:relative;overflow:hidden;height:272px;border:8px solid var(--deep);box-shadow:inset 0 0 0 6px var(--mint),8px 8px 0 #071b21;background:linear-gradient(#b0c4ad 0 70%,#597367 70% 100%);isolation:isolate}
+    .scene::before{content:"";position:absolute;left:0;right:0;top:66%;height:11px;background:#416c67;box-shadow:0 9px #c1d3b9}
+    .shelf{position:absolute;left:7%;top:24%;width:31%;height:7px;background:#38645d;box-shadow:0 87px #e0d4a8}
+    .flask{position:absolute;left:10%;top:30%;width:28px;height:54px;background:linear-gradient(#e8f0df 0 51%,#82c9b8 51%);border:5px solid #e8f0df;box-shadow:54px 0 0 -1px #e8f0df,54px 9px 0 -1px #e5bd78}
+    .julio{position:absolute;left:29%;bottom:4px;width:210px;max-width:47%;height:auto;image-rendering:pixelated;filter:drop-shadow(8px 8px 0 #28463f)}
+    .bubble{position:absolute;right:5%;top:12%;width:39%;padding:14px 10px;background:#eef2dc;border:6px solid #244a51;color:var(--panel);font-size:clamp(13px,3.4vw,17px);font-weight:900;line-height:1.35;box-shadow:5px 5px 0 #244a51}
+    .bubble::after{content:"";position:absolute;left:8%;bottom:-16px;width:20px;height:13px;background:#eef2dc}
+    .intro{max-width:490px;margin:27px auto 24px;line-height:1.55;font-size:clamp(16px,4.2vw,20px)}
+    .intro strong{color:var(--gold)}
+    .actions{display:grid;gap:14px;text-align:left}
+    .action{display:flex;align-items:center;gap:14px;min-height:88px;padding:15px 18px;border:3px solid var(--mint);background:#244a51;box-shadow:6px 6px 0 var(--deep);text-decoration:none;transition:transform .12s ease,box-shadow .12s ease}
+    a.action:hover{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--deep);background:#315e5c}
+    .action .icon{display:grid;place-items:center;flex:none;width:44px;height:44px;border:2px solid currentColor;font-size:24px}
+    .action .copy{min-width:0;flex:1}
+    .action strong{display:block;font-size:clamp(17px,4.5vw,23px);line-height:1.25}
+    .action small{display:block;margin-top:4px;font-size:13px;line-height:1.4;font-weight:400}
+    .action .arrow{font-size:27px;font-weight:800}
+    .vote{border-color:var(--gold);background:var(--gold);color:var(--ink)}
+    a.vote:hover{background:#ffe0a0}
+    .vote.pending{background:#344c4d;color:#e4d6af;border-color:#aa9974;box-shadow:none;cursor:default}
+    .vote.pending .icon{font-size:23px}
+    [hidden]{display:none!important}
+    footer{margin-top:32px;border-top:5px solid var(--mint);padding-top:17px;color:var(--muted);font-size:13px;line-height:1.55}
+    footer a{text-underline-offset:3px}
+    @media(max-width:390px){.scene{height:230px}.julio{width:180px}.bubble{font-size:12px;padding:10px 6px}.action{min-height:78px;padding:12px}}
+    @media(prefers-reduced-motion:reduce){.action{transition:none}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topline">DESENVOLVIDO NO CPBIO-UFMT</div>
+    <div class="brand" aria-label="CapiLab">CAPILAB</div>
+    <h1>Energia da Amazônia</h1>
+    <div class="badge">CIÊNCIA BRASILEIRA EM DESTAQUE · FINALISTA</div>
+
+    <div class="scene" role="img" aria-label="Júlio, a capivara cientista de jaleco, em um laboratório pixel art">
+      <span class="shelf" aria-hidden="true"></span><span class="flask" aria-hidden="true"></span>
+      <img class="julio" src="julio.png" width="64" height="70" alt="">
+      <span class="bubble" aria-hidden="true">OI! VAMOS LEVAR A CIÊNCIA MAIS LONGE?</span>
+    </div>
+
+    <p class="intro">Explore o laboratório com <strong>Júlio</strong> e descubra como a ciência transforma o babaçu em conhecimento.</p>
+    <section class="actions" aria-label="Links do CapiLab">
+      <a id="vote-link" class="action vote" href="#" target="_blank" rel="noopener noreferrer" hidden>
+        <span class="icon" aria-hidden="true">★</span><span class="copy"><strong>Vote no CapiLab</strong><small>Votação prevista de 6 a 11 de outubro · formulário oficial</small></span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <div id="vote-pending" class="action vote pending" role="status">
+        <span class="icon" aria-hidden="true">★</span><span class="copy"><strong>Votação em breve</strong><small>O link oficial será adicionado aqui</small></span>
+      </div>
+      <a class="action" href="https://alvaresallan.github.io/capilab/">
+        <span class="icon" aria-hidden="true">▶</span><span class="copy"><strong>Jogue grátis no navegador</strong><small>Aprenda explorando o laboratório</small></span><span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="action" href="https://github.com/Alvaresallan/capilab/releases/download/v0.6.3/CapiLab-Windows-v0.6.3.zip">
+        <span class="icon" aria-hidden="true">↓</span><span class="copy"><strong>Baixe para Windows</strong><small>Versão para jogar no computador</small></span><span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </section>
+    <footer>CapiLab: Energia da Amazônia · CPBIO-UFMT<br>Concepção e dados experimentais: Allan Alvares Leite<br><a href="https://github.com/Alvaresallan/capilab">Conheça o projeto no GitHub</a></footer>
+  </main>
+  <script>
+    const votingUrl = 'https://forms.gle/GZ3EzGvA3gTsbpnr5';
+    if (votingUrl) {
+      const link = document.getElementById('vote-link');
+      link.href = votingUrl;
+      link.hidden = false;
+      document.getElementById('vote-pending').hidden = true;
+    }
+  </script>
+</body>
+</html>
